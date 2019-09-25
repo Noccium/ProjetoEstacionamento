@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PojetoEstacionamento.MaquinaCalculoValorPago
+namespace ProjetoEstacionamento.MaquinaCalculoValorPago
 {
     public enum EnumTipoCalculoValorPago
     {   
-        Caminhonete,
+        Camionete,
         Carro,
         Motocicleta
     }

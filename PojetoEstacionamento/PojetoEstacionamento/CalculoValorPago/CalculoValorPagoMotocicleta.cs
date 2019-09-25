@@ -1,17 +1,25 @@
-﻿using PojetoEstacionamento.Veiculos;
+﻿using ProjetoEstacionamento.CalculoValorPago;
+using ProjetoEstacionamento.Veiculos;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PojetoEstacionamento.CalculoValorPago
+namespace ProjetoEstacionamento.CalculoValorPago
 {
     public class CalculoValorPagoMotocicleta : ICalculoValorPago<Motocicleta>
     {
+        public double ValorBaseHora { get; set; }
+        public double ValorPorHora { get; set; }
+        public CalculoValorPagoMotocicleta()
+        {
+            ValorBaseHora = 1.5;
+            ValorPorHora = 1;
+        }
         public void CalculaValorPago(Motocicleta veiculo)
         {
-            veiculo.ValorPago = 1.5 +
-                Convert.ToInt32(
-                    Math.Sqrt( Math.Pow( (veiculo.DataEntrada - veiculo.DataSaida).TotalHours - 1, 2) ) );
+            veiculo.ValorPago = ValorBaseHora +
+                ValorPorHora * Convert.ToInt32(
+                    Math.Sqrt(Math.Pow((veiculo.DataEntrada - veiculo.DataSaida).TotalHours - 1, 2)));
         }
     }
 }
