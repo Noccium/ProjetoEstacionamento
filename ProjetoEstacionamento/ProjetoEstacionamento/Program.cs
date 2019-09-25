@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PojetoEstacionamento
+namespace ProjetoEstacionamento
 {
     class Program
     {
