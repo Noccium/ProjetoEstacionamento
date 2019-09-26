@@ -1,4 +1,4 @@
-﻿using ProjetoEstacionamento.CalculoValorPago;
+﻿using ProjetoEstacionamento.MaquinaCalculoValorPago;
 using ProjetoEstacionamento.Veiculos;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,8 @@ using System.Text;
 
 namespace ProjetoEstacionamento.CalculoValorPago
 {
-    public class CalculoValorPagoMotocicleta : ICalculoValorPago<Motocicleta>
+    [TipoCalculoValorPago(EnumTipoCalculoValorPago.Motocicleta)]
+    public class CalculoValorPagoMotocicleta : CalculoValorPagoAvulso, ICalculoValorPago<Motocicleta>
     {
         public double ValorBaseHora { get; set; }
         public double ValorPorHora { get; set; }
@@ -17,9 +18,7 @@ namespace ProjetoEstacionamento.CalculoValorPago
         }
         public void CalculaValorPago(Motocicleta veiculo)
         {
-            veiculo.ValorPago = ValorBaseHora +
-                ValorPorHora * Convert.ToInt32(
-                    Math.Sqrt(Math.Pow((veiculo.DataEntrada - veiculo.DataSaida).TotalHours - 1, 2)));
+            Calcula(veiculo, ValorBaseHora, ValorPorHora);
         }
     }
 }

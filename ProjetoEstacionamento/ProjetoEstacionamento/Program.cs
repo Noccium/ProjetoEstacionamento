@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ProjetoEstacionamento.Veiculos;
+using ProjetoEstacionamento.CalculoValorPago;
+using ProjetoEstacionamento.MaquinaCalculoValorPago;
+using System;
 
 namespace ProjetoEstacionamento
 {
@@ -6,14 +9,21 @@ namespace ProjetoEstacionamento
     {
         static void Main(string[] args)
         {
-            DateTime a = DateTime.Now;
-            DateTime b = DateTime.Now;
-            b = b.AddDays(1);
-            b = b.AddHours(1);
-            Console.WriteLine(a);
-            Console.WriteLine(b);
-            Console.WriteLine(Convert.ToInt32( Math.Sqrt( Math.Pow((a - b).TotalHours, 2) ) ));
-            Console.WriteLine((a - b).TotalHours);
+            CalculoValorPagoCarro calculoCarro = new CalculoValorPagoCarro();
+            CalculoValorPagoCamionete calculoCamionete = new CalculoValorPagoCamionete();
+            CalculoValorPagoMotocicleta calculoMotocicleta = new CalculoValorPagoMotocicleta();
+
+            Carro carro = new Carro("ABC1234");
+            Camionete camionete = new Camionete("DEF5678");
+            Motocicleta motocicleta = new Motocicleta("GHI9123");
+           
+            calculoCarro.CalculaValorPago(carro);
+            calculoCamionete.CalculaValorPago(camionete);
+            calculoMotocicleta.CalculaValorPago(motocicleta);
+
+            Console.WriteLine(carro.ValorPago);
+            Console.WriteLine(camionete.ValorPago);
+            Console.WriteLine(motocicleta.ValorPago);
         }
     }
 }
