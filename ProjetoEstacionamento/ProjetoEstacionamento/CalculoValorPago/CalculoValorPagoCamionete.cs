@@ -6,19 +6,17 @@ using System.Text;
 
 namespace ProjetoEstacionamento.CalculoValorPago
 {
-    [TipoCalculoValorPago(EnumTipoCalculoValorPago.Camionete)]
-    class CalculoValorPagoCamionete : CalculoValorPagoAvulso, ICalculoValorPago<Camionete>
+    class CalculoValorPagoCamionete : CalculoValorPagoAvulso
     {
-        public double ValorBaseHora { get; set; }
-        public double ValorPorHora { get; set; }
+        private static double ValorBaseHora = 5;
+        private static double ValorPorHora = 3;
         public CalculoValorPagoCamionete()
         {
-            ValorBaseHora = 5;
-            ValorPorHora = 3;
         }
-        public void CalculaValorPago(Camionete veiculo)
+        public double CalculaValorPago(Camionete veiculo)
         {
             Calcula(veiculo, ValorBaseHora, ValorPorHora);
+            return veiculo.ValorPago;
         }
 
     }

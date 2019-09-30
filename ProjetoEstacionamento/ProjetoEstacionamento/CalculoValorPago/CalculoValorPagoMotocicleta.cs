@@ -7,18 +7,17 @@ using System.Text;
 namespace ProjetoEstacionamento.CalculoValorPago
 {
     [TipoCalculoValorPago(EnumTipoCalculoValorPago.Motocicleta)]
-    public class CalculoValorPagoMotocicleta : CalculoValorPagoAvulso, ICalculoValorPago<Motocicleta>
+    public class CalculoValorPagoMotocicleta : CalculoValorPagoAvulso
     {
-        public double ValorBaseHora { get; set; }
-        public double ValorPorHora { get; set; }
+        public static double ValorBaseHora = 1.5;
+        public static double ValorPorHora = 1;
         public CalculoValorPagoMotocicleta()
         {
-            ValorBaseHora = 1.5;
-            ValorPorHora = 1;
         }
-        public void CalculaValorPago(Motocicleta veiculo)
+        public double CalculaValorPago(Motocicleta veiculo)
         {
             Calcula(veiculo, ValorBaseHora, ValorPorHora);
+            return veiculo.ValorPago;
         }
     }
 }

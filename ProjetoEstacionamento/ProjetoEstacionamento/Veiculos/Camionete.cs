@@ -14,5 +14,9 @@ namespace ProjetoEstacionamento.Veiculos
         {
             return EnumTipoCalculoValorPago.Camionete;
         }
+        public override string ToString()
+        {
+            return "Camionete";
+        }
     }
 }

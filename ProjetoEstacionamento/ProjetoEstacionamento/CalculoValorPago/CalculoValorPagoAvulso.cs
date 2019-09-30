@@ -10,13 +10,22 @@ namespace ProjetoEstacionamento.CalculoValorPago
         public void Calcula(Veiculo veiculo, double valorBaseHora, double valorPorHora)
         {
             //veiculo.DataSaida = DateTime.Now;
-            veiculo.DataSaida = DateTime.Now.AddHours(1);
-            int teste15Minutos = ( (veiculo.DataSaida - veiculo.DataEntrada).TotalMinutes >= 15) ? 1 : 0;
-            //Se teste15Minutos >= 15 quantidadeUtilizada ++
-                //Se quantidadeUtilizada maior que 3 quantidadeUtilizada = 0 e ValorPago = 0
-            veiculo.ValorPago = (valorBaseHora +
-                valorPorHora * Convert.ToInt32((veiculo.DataSaida - veiculo.DataEntrada).TotalHours - 1)) *
-                teste15Minutos;
+            veiculo.DataSaida = DateTime.Now.AddHours(2);
+            
+            if (veiculo.QuantidadeUtilizado == 3)
+            {
+                veiculo.QuantidadeUtilizado = 0;
+                veiculo.ValorPago = 0;
+            } else if ( (veiculo.DataSaida - veiculo.DataEntrada).TotalMinutes < 15 )
+            {
+                veiculo.ValorPago = valorBaseHora;
+            } else
+            {
+                veiculo.QuantidadeUtilizado++;
+                veiculo.ValorPago = (valorBaseHora +
+                valorPorHora * Convert.ToInt32((veiculo.DataSaida - veiculo.DataEntrada).TotalHours - 1));
+            }
+            veiculo.ListaDataUso.Add((veiculo.DataEntrada, veiculo.DataSaida));
         }
     }
 }
